@@ -1,0 +1,21 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/extensions": "off",
+    "@typescript-eslint/no-shadow": ["warn"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "import/prefer-default-export": "off",
+    "object-curly-newline": "off",
+    "curly": ["error", "multi-line"],
+    "eol-last": 1
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
+}
