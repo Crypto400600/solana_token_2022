@@ -57,8 +57,8 @@ console.log('Payer address:', payer.publicKey.toBase58());
 console.log('Payer Account Balance:', await connection.getBalance(payer.publicKey));
 
 // Initialize token MetaData
-const imagePath = 'src/trump1.png';
-const metadataPath = 'src/temp.json';
+const imagePath = 'src/logo.png';
+const metadataPath = 'src/metadata.json';
 const tokenName = 'Trump Bulletverse';
 const tokenDescription = 'The First AI-powered Memecoin Creating Infinite Meme Games on Solana';
 const tokenSymbol = '$BTrump';
