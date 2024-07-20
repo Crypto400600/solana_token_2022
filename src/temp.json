@@ -1,16 +1,16 @@
 {
-    "name": "Cat NFT",
-    "symbol": "EMB",
-    "description": "This is a cat",
+    "name": "Trump Bulletverse",
+    "symbol": "$BTrump",
+    "description": "The First AI-powered Memecoin Creating Infinite Meme Games on Solana",
     "external_url": "https://solana.com/",
-    "image": "https://gateway.irys.xyz/dtv2veH-zAsERVjT4bFBMTk68zQDyE66nYP9FrQHXrE",
+    "image": "https://gateway.irys.xyz/CUvs4wkh2d5wjhHrSiILk7D_LuoyOgtEhXkEp68TSGo",
     "attributes": [
         {
-            "trait_type": "species",
-            "value": "Cat"
+            "trait_type": "speciality",
+            "value": "Trump"
         },
         {
-            "trait_type": "breed",
+            "trait_type": "personality",
             "value": "Cool"
         }
     ]

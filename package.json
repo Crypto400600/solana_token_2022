@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx esrun src/index.ts",
-    "metadata-embedded": "ts-node src/embedded-metadata.ts",
-    "metadata-pointer": "ts-node src/metadata-with-pointer.ts"
+    "start": "npx esrun src/app.ts",
+    "withdraw-fee": "npx esrun src/withdraw.ts"
   },
   "keywords": [],
   "author": "",
