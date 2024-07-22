@@ -57,7 +57,7 @@ console.log('Payer address:', payer.publicKey.toBase58());
 console.log('Payer Account Balance:', await connection.getBalance(payer.publicKey));
 
 // Initialize token MetaData
-const imagePath = 'src/logo.png';
+const imagePath = 'src/logo1.png';
 const metadataPath = 'src/metadata.json';
 const tokenName = 'Trump Bulletverse';
 const tokenDescription = 'The First AI-powered Memecoin Creating Infinite Meme Games on Solana';
@@ -222,85 +222,6 @@ async function main() {
     TOKEN_2022_PROGRAM_ID,
   );
   console.log('Tokens Minted:', generateExplorerTxUrl(mintSig));
-
-  // Step 4 - Send Tokens from Owner to a New Account
-  // const destinationOwner = Keypair.generate();
-  // const destinationOwner = Keypair.fromSecretKey(bs.decode(process.env.TOKEN_RECIPIENT));
-  // if (!destinationOwner) {
-  //   throw new Error('Destination not found');
-  // }
-
-  const destinationAccount = await createAssociatedTokenAccountIdempotent(
-    connection,
-    payer,
-    mint,
-    owner.publicKey,
-    {},
-    TOKEN_2022_PROGRAM_ID,
-  );
-  const transferSig = await transferCheckedWithFee(
-    connection,
-    payer,
-    sourceAccount,
-    mint,
-    destinationAccount,
-    owner,
-    transferAmount,
-    decimals,
-    fee,
-    [],
-  );
-  console.log('Tokens Transfered:', generateExplorerTxUrl(transferSig));
-
-  // Step 5 - Fetch Fee Accounts
-  const allAccounts = await connection.getProgramAccounts(TOKEN_2022_PROGRAM_ID, {
-    commitment: 'confirmed',
-    filters: [
-      {
-        memcmp: {
-          offset: 0,
-          bytes: mint.toString(),
-        },
-      },
-    ],
-  });
-
-  const accountsToWithdrawFrom: PublicKey[] = [];
-  for (const accountInfo of allAccounts) {
-    const account = unpackAccount(accountInfo.pubkey, accountInfo.account, TOKEN_2022_PROGRAM_ID);
-    const transferFeeAmount = getTransferFeeAmount(account);
-    if (transferFeeAmount !== null && transferFeeAmount.withheldAmount > BigInt(0)) {
-      accountsToWithdrawFrom.push(accountInfo.pubkey);
-    }
-  }
-
-  // Step 6 - Harvest Fees
-
-  // const feeVault = Keypair.generate();
-  const feeVault = Keypair.fromSecretKey(bs.decode(process.env.FEE_RECIPIENT));
-  if (!feeVault) {
-    throw new Error('FeeVault not found');
-  }
-
-  const feeVaultAccount = await createAssociatedTokenAccountIdempotent(
-    connection,
-    payer,
-    mint,
-    feeVault.publicKey,
-    {},
-    TOKEN_2022_PROGRAM_ID,
-  );
-
-  const withdrawSig1 = await withdrawWithheldTokensFromAccounts(
-    connection,
-    payer,
-    mint,
-    feeVaultAccount,
-    withdrawWithheldAuthority,
-    [],
-    accountsToWithdrawFrom,
-  );
-  console.log('Withdraw from Accounts:', generateExplorerTxUrl(withdrawSig1));
 }
 // Execute the main function
 main();

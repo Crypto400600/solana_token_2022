@@ -1,3 +1,5 @@
+import { PublicKey } from "@solana/web3.js";
+
 const { Connection, Keypair, clusterApiUrl } = require('@solana/web3.js');
 const {
   TOKEN_2022_PROGRAM_ID,
@@ -17,16 +19,13 @@ if (!payer) {
   throw new Error('PAYER not found');
 }
 
+const recipientPublicKey = new PublicKey(process.env.FEE_RECIPIENT_WALLET);
+
 const mint = Keypair.fromSecretKey(new Uint8Array(JSON.parse(process.env.MINT_KEYPAIR))).publicKey;
 
 const withdrawWithheldAuthority = Keypair.fromSecretKey(
   new Uint8Array(JSON.parse(process.env.WITHDRAW_WITHHELD_AUTHORITY)),
 );
-
-const recipientKeypair = Keypair.fromSecretKey(bs.decode(process.env.FEE_RECIPIENT));
-if (!recipientKeypair) {
-  throw new Error('FEE_RECIPIENT not found');
-}
 
 const balance = await connection.getBalance(payer.publicKey);
 if (balance < 10000000) {
@@ -66,13 +65,14 @@ if (accountsToWithdrawFrom.length === 0) {
 }
 
 console.log(accountsToWithdrawFrom);
-console.log(recipientKeypair.publicKey.toBase58());
+console.log(recipientPublicKey.toBase58());
 
 const feeVaultAccount = await createAssociatedTokenAccountIdempotent(
   connection,
   payer,
   mint,
-  recipientKeypair.publicKey,
+  // recipientKeypair.publicKey,
+  recipientPublicKey,
   {},
   TOKEN_2022_PROGRAM_ID,
 );
