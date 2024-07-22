@@ -45,7 +45,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Initialize connection to local Solana node
-const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
 // Generate keys for payer, mint authority, and mint
 // const payer = Keypair.generate();
@@ -57,7 +57,7 @@ console.log('Payer address:', payer.publicKey.toBase58());
 console.log('Payer Account Balance:', await connection.getBalance(payer.publicKey));
 
 // Initialize token MetaData
-const imagePath = 'src/logo1.png';
+const imagePath = 'src/logo.png';
 const metadataPath = 'src/metadata.json';
 const tokenName = 'Trump Bulletverse';
 const tokenDescription = 'The First AI-powered Memecoin Creating Infinite Meme Games on Solana';
@@ -125,10 +125,11 @@ const calcFee = (transferAmount * BigInt(feeBasisPoints)) / BigInt(10_000); // e
 const fee = calcFee > maxFee ? maxFee : calcFee; // expect 9 fee
 // Helper function to generate Explorer URL
 function generateExplorerTxUrl(txId: string) {
-  return `https://explorer.solana.com/tx/${txId}?cluster=devnet`;
+  return `https://explorer.solana.com/tx/${txId}?cluster=mainnet-beta`;
 }
 
 async function main() {
+  /*
   // Step 1 - Deposit SOL to Payer
 
   // Step 2 - Create a New Token
@@ -222,6 +223,7 @@ async function main() {
     TOKEN_2022_PROGRAM_ID,
   );
   console.log('Tokens Minted:', generateExplorerTxUrl(mintSig));
+  //*/
 }
 // Execute the main function
 main();

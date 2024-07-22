@@ -12,7 +12,7 @@ const bs = require('bs58');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
 const payer = Keypair.fromSecretKey(bs.decode(process.env.PAYER));
 if (!payer) {
@@ -89,10 +89,9 @@ const withdrawTokensSig = await withdrawWithheldTokensFromAccounts(
   TOKEN_2022_PROGRAM_ID, // SPL token program id
 );
 
-console.log('Bag secured, check it:', `https://explorer.solana.com/tx/${withdrawTokensSig}?cluster=devnet`);
+console.log('Bag secured, check it:', `https://explorer.solana.com/tx/${withdrawTokensSig}?cluster=mainnet-beta`);
 
 // Optionally - you can also withdraw withheld tokens from the mint itself
-// see ReadMe for the difference
 
 // await withdrawWithheldTokensFromMint(
 //   connection, // connection to use
