@@ -6,9 +6,6 @@ const {
   clusterApiUrl,
   SystemProgram,
   Transaction,
-  LAMPORTS_PER_SOL,
-  Cluster,
-  PublicKey,
   TransactionInstruction,
 } = require('@solana/web3.js');
 
@@ -17,19 +14,11 @@ const {
   createInitializeMintInstruction,
   createInitializeMetadataPointerInstruction,
   mintTo,
-  createAccount,
   getMintLen,
-  getTransferFeeAmount,
-  unpackAccount,
   LENGTH_SIZE,
   TOKEN_2022_PROGRAM_ID,
   TYPE_SIZE,
   createInitializeTransferFeeConfigInstruction,
-  harvestWithheldTokensToMint,
-  transferCheckedWithFee,
-  withdrawWithheldTokensFromAccounts,
-  withdrawWithheldTokensFromMint,
-  getOrCreateAssociatedTokenAccount,
   createAssociatedTokenAccountIdempotent,
 } = require('@solana/spl-token');
 const {
@@ -45,7 +34,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Initialize connection to local Solana node
-const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+
+if (!process.env.PAYER || !process.env.MINT_KEYPAIR || !process.env.MINT_AUTHORITY) {
+  throw new Error('Please check env file for PAYER, MINT_KEYPAIR, and MINT_AUTHORITY');
+}
 
 // Generate keys for payer, mint authority, and mint
 // const payer = Keypair.generate();
@@ -125,11 +118,11 @@ const calcFee = (transferAmount * BigInt(feeBasisPoints)) / BigInt(10_000); // e
 const fee = calcFee > maxFee ? maxFee : calcFee; // expect 9 fee
 // Helper function to generate Explorer URL
 function generateExplorerTxUrl(txId: string) {
-  return `https://explorer.solana.com/tx/${txId}?cluster=mainnet-beta`;
+  return `https://explorer.solana.com/tx/${txId}?cluster=devnet`;
 }
 
 async function main() {
-  /*
+
   // Step 1 - Deposit SOL to Payer
 
   // Step 2 - Create a New Token
@@ -198,8 +191,13 @@ async function main() {
   );
   console.log('New Token Created:', generateExplorerTxUrl(newTokenTx));
 
+  if(!process.env.OWNER) {
+    throw new Error('OWNER not found');
+  }
+
   // Step 3 - Mint tokens to Owner
   const owner = Keypair.fromSecretKey(bs.decode(process.env.OWNER));
+
   if (!owner) {
     throw new Error('OWNER not found');
   }
@@ -223,7 +221,6 @@ async function main() {
     TOKEN_2022_PROGRAM_ID,
   );
   console.log('Tokens Minted:', generateExplorerTxUrl(mintSig));
-  //*/
 }
 // Execute the main function
 main();

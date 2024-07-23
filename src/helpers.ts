@@ -30,11 +30,11 @@ function formatIrysUrl(id: string) {
 
 const getIrysArweave = async (secretKey: Uint8Array) => {
 	const irys = new Irys({
-		network: 'mainnet',
+		network: 'devnet',
 		token: 'solana',
 		key: secretKey,
 		config: {
-			providerUrl: clusterApiUrl('mainnet-beta'),
+			providerUrl: clusterApiUrl('devnet'),
 		},
 	})
 	return irys

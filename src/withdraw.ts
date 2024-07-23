@@ -12,11 +12,15 @@ const bs = require('bs58');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 const payer = Keypair.fromSecretKey(bs.decode(process.env.PAYER));
 if (!payer) {
   throw new Error('PAYER not found');
+}
+
+if(!process.env.MINT_KEYPAIR || !process.env.WITHDRAW_WITHHELD_AUTHORITY || !process.env.FEE_RECIPIENT_WALLET) {
+  throw new Error('MINT_KEYPAIR or WITHDRAW_WITHHELD_AUTHORITY not found');
 }
 
 const recipientPublicKey = new PublicKey(process.env.FEE_RECIPIENT_WALLET);
@@ -45,7 +49,7 @@ const allAccounts = await connection.getProgramAccounts(TOKEN_2022_PROGRAM_ID, {
   ],
 });
 
-const accountsToWithdrawFrom = [];
+const accountsToWithdrawFrom = [] as PublicKey[];
 
 for (const accountInfo of allAccounts) {
   const account = unpackAccount(accountInfo.pubkey, accountInfo.account, TOKEN_2022_PROGRAM_ID);
@@ -89,7 +93,7 @@ const withdrawTokensSig = await withdrawWithheldTokensFromAccounts(
   TOKEN_2022_PROGRAM_ID, // SPL token program id
 );
 
-console.log('Bag secured, check it:', `https://explorer.solana.com/tx/${withdrawTokensSig}?cluster=mainnet-beta`);
+console.log('Bag secured, check it:', `https://explorer.solana.com/tx/${withdrawTokensSig}?cluster=devnet`);
 
 // Optionally - you can also withdraw withheld tokens from the mint itself
 
