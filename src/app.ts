@@ -36,10 +36,6 @@ dotenv.config();
 // Initialize connection to local Solana node
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
-if (!process.env.PAYER || !process.env.MINT_KEYPAIR || !process.env.MINT_AUTHORITY) {
-  throw new Error('Please check env file for PAYER, MINT_KEYPAIR, and MINT_AUTHORITY');
-}
-
 // Generate keys for payer, mint authority, and mint
 // const payer = Keypair.generate();
 const payer = Keypair.fromSecretKey(bs.decode(process.env.PAYER));
