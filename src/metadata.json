@@ -1,17 +1,17 @@
 {
-    "name": "SWIFT",
-    "symbol": "$SWFT",
-    "description": "The most efficient meme utility for eCommerce on solana",
+    "name": "TTSWIFT",
+    "symbol": "$TSTSWFT",
+    "description": "This is Test SWIFT Token",
     "external_url": "https://solana.com/",
-    "image": "https://gateway.irys.xyz/CRfkdGQXS3kqSKCqcND5JDcbw3CS48kdtc5r9wgZoEEa",
+    "image": "https://gateway.irys.xyz/AZUXOC7ZFFiTFTG0-sVY6SxL452Vn13b-xRz-_p-TtM",
     "attributes": [
         {
             "trait_type": "speciality",
-            "value": "SWIFT"
+            "value": "TSWIFT"
         },
         {
             "trait_type": "personality",
-            "value": "Swift Ledger LLC"
+            "value": "testSwiftLLC"
         }
     ]
 }

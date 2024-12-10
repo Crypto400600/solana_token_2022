@@ -34,7 +34,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Initialize connection to local Solana node
-const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
 // Generate keys for payer, mint authority, and mint
 // const payer = Keypair.generate();
@@ -106,15 +106,15 @@ const feeBasisPoints = 100; // 1%
 const maxFee = BigInt(10_000 * Math.pow(10, decimals)); // 10,000 tokens
 
 // Define the amount to be minted and the amount to be transferred, accounting for decimals
-const mintAmount = BigInt(10_000_000_000 * Math.pow(10, decimals)); // Mint 10,000,000,000 tokens
-const transferAmount = BigInt(10_000_000_000 * Math.pow(10, decimals)); // Transfer 10,000,000,000 tokens
+const mintAmount = BigInt(1_000_000_000 * Math.pow(10, decimals)); // Mint 1,000,000,000 tokens
+const transferAmount = BigInt(1_000_000_000 * Math.pow(10, decimals)); // Transfer 1,000,000,000 tokens
 
 // Calculate the fee for the transfer
 const calcFee = (transferAmount * BigInt(feeBasisPoints)) / BigInt(10_000); // expect 10 fee
 const fee = calcFee > maxFee ? maxFee : calcFee; // expect 9 fee
 // Helper function to generate Explorer URL
 function generateExplorerTxUrl(txId: string) {
-  return `https://explorer.solana.com/tx/${txId}?cluster=devnet`;
+  return `https://explorer.solana.com/tx/${txId}?cluster=mainnet-beta`;
 }
 
 async function main() {

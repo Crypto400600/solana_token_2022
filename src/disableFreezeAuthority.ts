@@ -16,7 +16,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Initialize connection to local Solana node
-const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
 
 if(!process.env.PAYER || !process.env.MINT_KEYPAIR || !process.env.MINT_AUTHORITY) {
   throw new Error('PAYER or MINT_KEYPAIR or MINT_AUTHORITY not found');
@@ -46,4 +46,4 @@ const transaction = new Transaction().add(
 
 const signature = await sendAndConfirmTransaction(connection, transaction, [payer, mint, freezeAuthority]);
 
-console.log("Signature:", `https://explorer.solana.com/tx/${signature}?cluster=devnet`);
+console.log("Signature:", `https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`);
