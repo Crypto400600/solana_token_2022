@@ -46,15 +46,15 @@ console.log('Payer address:', payer.publicKey.toBase58());
 console.log('Payer Account Balance:', await connection.getBalance(payer.publicKey));
 
 // Initialize token MetaData
-const imagePath = 'src/logo.png';
+const imagePath = 'src/SWIFT.png';
 const metadataPath = 'src/metadata.json';
-const tokenName = 'Trump Bulletverse';
-const tokenDescription = 'The First AI-powered Memecoin Creating Infinite Meme Games on Solana';
-const tokenSymbol = '$BTrump';
+const tokenName = 'SWIFT';
+const tokenDescription = 'The most efficient meme utility for eCommerce on solana';
+const tokenSymbol = '$SWFT';
 const tokenExternalUrl = 'https://solana.com/';
 const tokenAdditionalMetadata = {
-  speciality: 'Trump',
-  personality: 'Cool',
+  speciality: 'SWIFT',
+  personality: 'Swift Ledger LLC',
 };
 
 const tokenUri = await uploadOffChainMetadata(

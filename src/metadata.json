@@ -1,17 +1,17 @@
 {
-    "name": "Trump Bulletverse",
-    "symbol": "$BTrump",
-    "description": "The First AI-powered Memecoin Creating Infinite Meme Games on Solana",
+    "name": "SWIFT",
+    "symbol": "$SWFT",
+    "description": "The most efficient meme utility for eCommerce on solana",
     "external_url": "https://solana.com/",
-    "image": "https://gateway.irys.xyz/Z5JxRjJwFz3hkTngvrlIHmGusD49MywtUyzA8EnFc0s",
+    "image": "https://gateway.irys.xyz/CRfkdGQXS3kqSKCqcND5JDcbw3CS48kdtc5r9wgZoEEa",
     "attributes": [
         {
             "trait_type": "speciality",
-            "value": "Trump"
+            "value": "SWIFT"
         },
         {
             "trait_type": "personality",
-            "value": "Cool"
+            "value": "Swift Ledger LLC"
         }
     ]
 }
