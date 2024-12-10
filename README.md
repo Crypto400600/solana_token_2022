@@ -3,20 +3,13 @@
 ### Usage
 
 1. `npm install` or yarn
-2. Write code in `index.js`
-3. `npm run start`
+2. please check metadata details in app.ts.
+3. creat .env file and insert public and private keys
+    
+    PAYER="PAYER_WALLET_PRIVATE_KEY"
+    OWNER="OWNER_WALLET_PRIVATE_KEY"
+    FEE_RECIPIENT_WALLET="TAX_MANAGER_PUBLIC_KEY"
 
-### Helpers
-
-1. initializeKeypair:
-   1. takes a connection obj
-   1. takes optional filePath, if you provide the keypair file path like
-      `~/.config/solana/id.json` which is the default keypair for Solana CLI it
-      will take the keypair from there and consider them as payer
-   1. if not it will generate a new keypair and store them in the .env to use
-      them in the future with any other transaction
-   1. it will airdrop SOL for the payer account if need
-1. uploadOffChainMetadata:
-   1. take metadata inputs like name, symbol, description, and image
-   1. uploads them to an off-chain storage provide
-   1. return a URI that points to that metadata JSON
+4. `npm run start` it will mint token -> owner wallet
+5. `npm run withdraw-fee` it will withdraw fee -> tax manager wallet
+6. before adding liquidity, please run `npm run disable-freeze` to stop mint token after launched
